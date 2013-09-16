@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" mini="true">
+		<pm:view id="viewA" swatch="d">
+			<pm:header title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" swatch="b">
+				<f:facet name="right">
+					<h:form>
+						<p:commandButton process="@this" value="Home" icon="home"
+							action="#{navegarPaginaMB.home}" />
+					</h:form>
+				</f:facet>
+				<f:facet name="left">
+					<h:outputLink value="index.jsf?" process="@this">Sair</h:outputLink>
+				</f:facet>
+			</pm:header>
+			<pm:content >
+				<center>
+					<h2>Cadastro e Consulta de Setores</h2>
+				</center>
+				<!-- <h:form id="atr">
+				 <p:growl id="growl" />  
+				<p:autoComplete completeMethod="#{setorMB.setores}" />
+				</h:form> -->
+				<p:accordionPanel id="ac1"  multiple="true"  >
+					<p:tab  title="Relação de setores">
+						<h:form id="frm1"  >
+							<p:dataTable id="setores" value="#{setorMB.setores}"  var="setor"  >
+                              <!--  <f:attribute name="columnToggle" value="true" /> -->
+                              
+								<p:column headerText="Codigo" >								
+									<h:outputText value="#{setor.codigo}"></h:outputText>									
+								</p:column>
+
+								<p:column headerText="Descrição" >
+									<h:outputText value="#{setor.descricao}"></h:outputText>									
+								</p:column>
+								<p:column headerText="Responsavel">
+									<h:outputText value="#{setor.responsavel}"></h:outputText>									
+								</p:column>
+								<p:column headerText="Observação">
+									<h:outputText value="#{setor.observacao}"></h:outputText>									
+								</p:column>
+								 <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>> Ações <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  -->
+								 <p:column headerText="Ações">
+									<p:commandLink update=":frm4:txtCod, :frm4:txtSet, :frm4:txtRes, :frm4:txtObs " actionListener="#{setorMB.edit(setor)}">
+                                    <h:graphicImage value="/img/trash.png" title="Deletar"
+                                                    onclick="dlgRem.show();"/>
+                                </p:commandLink>
+                                <p:spacer width="10"/>
+                                <p:commandLink >
+                                               
+                                    <h:graphicImage value="/img/edit.png" title="Alterar" onclick="dlgAlt.show();"/>
+                                </p:commandLink>								
+								</p:column> 
+						
+								
+							</p:dataTable>
+							
+						</h:form>
+					</p:tab>
+
+					<p:tab title="Cadastro de Novo Setor">
+						<h:form id="frm2">
+						<p:growl id="grow1"  autoUpdate="salvar"/>
+							<p:outputLabel value="Setor:" />
+							<p:inputText value="#{setorMB.setor.descricao}" required="true" />
+							<p:outputLabel value="Responsavel:" />
+							<p:inputText value="#{setorMB.setor.responsavel}" required="true" />
+							<p:outputLabel value="Observação:" />
+							<p:inputTextarea value="#{setorMB.setor.observacao}" required="true" />
+							<p:commandButton value="Salvar:"
+								action="#{setorMB.save(setorMB.setor)}" update=":ac1" ajax="true">
+								</p:commandButton>
+						</h:form>
+					</p:tab>
+				</p:accordionPanel>
+				<h:form id="frm4">
+				<p:growl id="grow1"  autoUpdate="Delete"/>
+					<p:dialog id="modalDialog" header="Removendo Setor" widgetVar="dlgRem">
+					<h:panelGrid columns="2" >
+					 <h:outputText value="Codigo"/>
+					 <h:outputText id="txtCod" value="#{setorMB.setorEd.codigo}"/>
+					 <h:outputText value="Setor"/>
+					 <h:outputText id="txtSet" value="#{setorMB.setorEd.descricao}"/>
+					 <h:outputText value="Responsavel"/>
+					 <h:outputText id="txtRes" value="#{setorMB.setorEd.responsavel}"/>
+					 <h:outputText value="Observação"/>
+					 <h:outputText id="txtObs" value="#{setorMB.setorEd.observacao}" disabled="true" />
+					 <p:button value="Cancelar" onclick="dlgRem.hide();"/>
+					 <p:commandButton value="Remover"   process="@this" action="#{setorMB.apagar(setorMB.setorEd)}" update=":ac1"  onclick="dlgRem.hide();" />
+					</h:panelGrid>
+					</p:dialog>
+				</h:form>
+
+			</pm:content>
+			<pm:footer fixed="true" swatch="c">
+				<h1 style="font-size: x-small">WebApp Gestão de Ordem de Serviços e Visitas</h1>
+				<h1 style="font-size: x-small">Leonardo R. Bastelli</h1>
+			</pm:footer>
+		</pm:view>
+	</pm:page>
+</f:view>

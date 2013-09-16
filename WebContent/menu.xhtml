@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- é usado para poder usar acento e caracteres especial  -->
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" mini="true" >
+		<pm:view id="Menu" swatch="d">
+			<pm:header title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" swatch="c">
+				<f:facet name="left">
+					<p:button id="btnMenuPanel" value="Menu"  icon="bars" />
+					<h:outputLink   value="index.jsf?" process="@this">Sair</h:outputLink>
+				</f:facet>
+			</pm:header>
+
+			<p:overlayPanel for="btnMenuPanel" widgetVar="panel" my="left">
+				<p:dataList>
+					<p:separator>CLIENTES</p:separator>
+					<h:outputLink value="clienteCad.jsf?">Cadastro</h:outputLink>
+					<h:outputLink  value="ConsultaCliente.jsf?" process="@this">Consulta</h:outputLink>
+					<p:separator>SERVIÇOS</p:separator>
+					<h:outputLink>Cadastro</h:outputLink>
+					<h:outputLink >Consulta</h:outputLink>
+					<p:separator>ORDEM DE SERVIÇO</p:separator>
+					<h:outputLink>Cadastro</h:outputLink>
+					<h:outputLink> Consulta</h:outputLink>
+					<p:separator>VISITAS</p:separator>
+					<h:outputLink>Cadastro</h:outputLink>
+					<h:outputLink value="PrimeFacesMobile.jsf?" process="@this">Consulta</h:outputLink>
+					<p:separator></p:separator>
+					<h:outputLink value="BuscaEndereco.jsf?" process="@this" >Busca de Endereço</h:outputLink>
+					
+					
+				</p:dataList>
+			</p:overlayPanel>
+			
+			<pm:content>
+			<br />
+			<br />
+			<center>
+			<h:outputText value="Trabalho de Comclusão de Curso" style="font-size: x-large"/><br/>
+			
+			<h:graphicImage  value="/img/java-logo.jpg" title="Trabalho de Comclusão de Curso" dir="rtl"/>
+			</center>
+			</pm:content>
+			
+		
+			<pm:footer fixed="true" swatch="c">
+				<h1 style="font-size: x-small">WebApp Gestão de Ordem de
+					Serviços e Visitas</h1>
+				<h1 style="font-size: x-small">Leonardo R. Bastelli</h1>
+			</pm:footer>
+		</pm:view>
+		
+		
+		
+		
+		
+		
+		
+	
+
+	</pm:page>
+</f:view>

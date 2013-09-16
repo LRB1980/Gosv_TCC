@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pm="http://primefaces.org/mobile"      
+        contentType="text/html"
+        renderKitId="PRIMEFACES_MOBILE">
+
+    <pm:page id="page" title="Calendar" mini="true">                        
+                                            
+             <f:facet name="postinit">                        
+           			 <link rel="stylesheet" href="#{request.contextPath}/javax.faces.resource/calendar/calendar.css.jsf?ln=primefaces-mobile" />
+                    <h:outputScript id="ptbr" library="primefaces-mobile" name="calendar/calendar.js" />        
+					
+            <script type="text/javascript">
+                (function($) {
+                    $.mobiscroll.i18n['pt_BR'] = $.extend($.mobiscroll.i18n['pt_BR'], {
+                        dateFormat: 'dd/mm/yy',
+                        dateOrder: 'ddMMyy',
+                        dayNames: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+                        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                        dayText: 'Dia',
+                        hourText: 'Hora',
+                        minuteText: 'Minutos',
+                        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        monthText: 'Mês',
+                        secText: 'Segundo',
+                        timeFormat: 'HH:ii',
+                        timeWheels: 'HHii',
+                        yearText: 'Ano',
+                        setText: 'Selecionar',
+                        cancelText: 'Cancelar',
+                        nowText: 'Agora'
+                    });
+                })(jQuery);
+            </script>
+        </f:facet>      
+
+          <h:outputScript id="ipt" name="inputMask.js" library="js" /> 
+		
+        <pm:view id="menu">
+            <pm:header title="Calendar">
+                
+            </pm:header>
+            <pm:content>
+
+                <h:form id="form">                       
+
+                   
+
+                    <h4>Brazilian Portuguese</h4>
+                    <p:calendar value="#{calendarBean.date1}" locale="pt_BR" widgetVar="panel"/>
+                    <!-- <p:dialog header="Selected Dates" widgetVar="dialog" showEffect="fade" hideEffect="fade"/>  --> 
+                    
+                </h:form>
+                
+                
+
+            </pm:content>
+        </pm:view>
+    </pm:page>       
+</f:view>

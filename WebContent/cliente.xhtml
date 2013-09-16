@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" mini="true">
+	
+		<pm:view swatch="c">
+			<pm:header title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" swatch="b">
+				<f:facet name="right">
+					<h:form>
+						<p:commandButton process="@this" value="Home" icon="home"
+							action="#{navegarPaginaMB.home}" />
+					</h:form>
+				</f:facet>
+				<f:facet name="left">
+					<h:outputLink value="index.jsf?" process="@this">Sair</h:outputLink>
+				</f:facet>
+			</pm:header>
+			<pm:content>
+				<center>
+					<h2>Cadastro e Consulta de Clientes</h2>
+				</center>
+				<p:accordionPanel id="ac1" multiple="true">
+					<p:tab title="Consulta de Clientes">
+						<h:form id="frm1" prependId="false">
+							<p:dataTable id="estados" value="#{estadoMB.estados}"
+								var="estado">
+								<p:column headerText="Codigo">
+									<h:outputText value="#{estado.codigo}"></h:outputText>
+								</p:column>
+								<p:column headerText="Descrição">
+									<h:outputText value="#{estado.descricao}"></h:outputText>
+								</p:column>
+								<p:column headerText="Sigla">
+									<h:outputText value="#{estado.sigla}"></h:outputText>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</p:tab>
+
+					<p:tab title="Cadastro de Clientes">
+						<h:form id="frm2" prependId="false">
+							<center>
+								<h3>Dados do Cliente</h3>
+							</center>
+							<p:outputLabel value="Nome " />
+							<p:inputText id="Nome" value="#{clienteMB.cliente.nome}">
+								<f:attribute name="placeholder" value="Nome" />
+							</p:inputText>
+							<h:selectOneRadio id="tipo"  binding="#{selectOneMB.checkEstado}" valueChangeListener="#{selectOneMB.mudar}" onchange="submit()" immediate="true" layout="lineDirection">
+							     <f:selectItem itemLabel="Pessoa Juridica" itemValue="PJ"  />  
+                                 <f:selectItem itemLabel="Pessoa Fisica" itemValue="PF" />  
+                              </h:selectOneRadio>
+							<p:outputLabel id="raz" value="Razão Social" />
+							<p:inputText id="RazaoSocial" rendered="Pessoa Juridica" binding="#{selectOneMB.checkInputTextEstado}"
+								value="#{clienteMB.cliente.razaoSocial}">
+								<f:attribute name="placeholder" value="Razão Social" />
+							</p:inputText>
+							
+							<p:outputLabel value="CPF" />
+							<p:inputText id="Cpf" value="#{clienteMB.cliente.cpf}">
+								<f:attribute name="placeholder" value="CPF" />
+							</p:inputText>
+							<p:outputLabel value="CNPJ" />
+							<p:inputText id="Cnpj" value="#{clienteMB.cliente.cnpj}">
+								<f:attribute name="placeholder" value="CNPJ" />
+							</p:inputText>
+							<p:outputLabel value="RG" />
+							<p:inputText id="RG" value="#{clienteMB.cliente.rg}">
+								<f:attribute name="placeholder" value="RG" />
+							</p:inputText>
+							<p:outputLabel value="Inscrição Estadual" />
+							<p:inputText id="IE" value="#{clienteMB.cliente.ie}">
+								<f:attribute name="placeholder" value="Inscrição Estadual" />
+							</p:inputText>
+							<p:outputLabel value="Data Nascimento" />
+							<p:inputText id="DataNascimento"
+								value="#{clienteMB.cliente.dataNacimento}">
+								<f:attribute name="placeholder" value="Data Nascimento" />
+							</p:inputText>
+							<p:outputLabel value="Descrição" />
+							<p:inputText id="Descricao"
+								value="#{clienteMB.cliente.descricao}">
+								<f:attribute name="placeholder" value="Descricão" />
+							</p:inputText>
+							<h:outputLabel value="HomePage:" />
+							<p:inputText id="HomePage"  value="#{clienteMB.cliente.homepage}">
+								<f:attribute name="placeholder" value="Home Page" />
+							</p:inputText>
+							<p:commandButton value="Cadastro de Endereço" inline="true" icon="check" onclick="dlgCad.show();" >
+							   <f:attribute name="swatch" value="b" />
+							</p:commandButton>
+							<br />
+							<h:outputLabel value="Endereço" />
+							<!-- <p:panelGrid columns="3"> -->
+							<p:inputText id="endereco"  title="Teste" value="#{clienteMB.cliente.enderecoCodigo}"  >
+								<f:attribute name="placeholder" value="Endereço" />
+							</p:inputText>
+							<!-- Ação para chamar poup de cadastro de novo endereço -->
+							
+							<!-- </p:panelGrid> -->
+							<p:button value="Salvar"
+								action="#{enderecoMB.save(enderecoMB.endereco)}" />
+						</h:form>
+					</p:tab>
+				</p:accordionPanel>
+				
+				<!-- Cadastro de novo endereço para cada novo cliente...OBRIGATORIO -->
+				<h:form id="frm4">
+				<p:growl id="grorwEnd" autoUpdate="Cadastro"/>
+				<p:dialog id="modalDialog" header="Cadastro de Endereço" widgetVar="dlgCad" >
+					<h:panelGrid columns="2">
+					<p:outputLabel value="Rua" />
+					<p:inputText id="Rua" value="#{enderecoMB.endereco.logradouro}">
+						<f:attribute name="placeholder" value="Rua" />
+					</p:inputText>
+					<p:outputLabel value="Bairro" />
+					<p:inputText id="Bairro" value="#{enderecoMB.endereco.bairro}">
+						<f:attribute name="placeholder" value="Bairro" />
+					</p:inputText>
+					<p:outputLabel value="Numero" />
+					<p:inputText id="Numero" value="#{enderecoMB.endereco.numero}">
+						<f:attribute name="placeholder" value="Numero" />
+					</p:inputText>
+					<p:outputLabel value="CEP" />
+					<p:inputText id="CEP" value="#{enderecoMB.endereco.cep}">
+						<f:attribute name="placeholder" value="CEP" />
+					</p:inputText>
+					<p:outputLabel value="Cidade" />
+					<p:inputText id="Cidade" value="">
+						<f:attribute name="placeholder" value="Cidade" />
+					</p:inputText>
+					<p:outputLabel value="Estado" />
+					<p:inputText id="Estado" value="">
+						<f:attribute name="placeholder" value="Estado" />
+					</p:inputText>					
+					<p:outputLabel value="Complemento" />
+					<p:inputText id="Complemento"
+						value="#{enderecoMB.endereco.complemento}">
+						<f:attribute name="placeholder" value="Complemento" />
+					</p:inputText>
+					<p:outputLabel value="DDD" />
+					<p:inputText id="DDD" value="#{enderecoMB.endereco.ddd}">
+						<f:attribute name="placeholder" value="DDD" />
+					</p:inputText>
+					<p:outputLabel value="Telefone" />
+					<p:inputText id="Telefone" value="#{enderecoMB.endereco.tel}">
+						<f:attribute name="placeholder" value="Telefone" />
+					</p:inputText>
+					<p:outputLabel value="Celular" />
+					<p:inputText id="Celular" value="#{enderecoMB.endereco.cel}">
+						<f:attribute name="placeholder" value="Celular" />
+					</p:inputText>
+					<p:outputLabel value="Email" />
+					<p:inputText id="Email" value="#{enderecoMB.endereco.email}"  >
+						<f:attribute name="placeholder" value="Email" />
+					</p:inputText>
+					</h:panelGrid>
+					<center>
+					<pm:buttonGroup orientation="horizontal">				
+					 <p:commandButton value="Voltar" onclick="dlgCad.hide();"  icon="delete" /> 
+					<p:commandButton  value="Salvar"  icon="check"  /> 
+					</pm:buttonGroup>
+					</center>
+					</p:dialog>
+				</h:form>
+			</pm:content>
+			<pm:footer fixed="true" swatch="c">
+				<h1 style="font-size: x-small">WebApp Gestão de Ordem de
+					Serviços e Visitas</h1>
+				<h1 style="font-size: x-small">Leonardo R. Bastelli</h1>
+			</pm:footer>
+		</pm:view>
+	</pm:page>
+</f:view>

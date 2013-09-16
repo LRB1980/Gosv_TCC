@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" mini="true">
+		<pm:view id="viewA" swatch="d">
+			<pm:header title="GESTÃO DE ORDEM DE SERVIÇO E VISITAS" swatch="b">
+				<f:facet name="right">
+					<h:form>
+						<p:commandButton process="@this" value="Home" icon="home"
+							action="#{navegarPaginaMB.home}" />
+					</h:form>
+				</f:facet>
+				<f:facet name="left">
+					<h:outputLink value="index.jsf?" process="@this">Sair</h:outputLink>
+				</f:facet>
+			</pm:header>
+			<pm:content>
+				<h:form>
+
+					<h:panelGrid columns="4" cellpadding="5">
+						<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+
+						<p:inputText id="name"  />
+
+						<p:commandButton value="Submit" update="display" />
+
+						<h:outputText  id="display" />
+					</h:panelGrid>
+
+				</h:form>
+
+			</pm:content>
+			<pm:footer fixed="true" swatch="c">
+				<h1 style="font-size: x-small">WebApp Gestão de Ordem de
+					Serviços e Visitas</h1>
+				<h1 style="font-size: x-small">Leonardo R. Bastelli</h1>
+			</pm:footer>
+		</pm:view>
+	</pm:page>
+</f:view>

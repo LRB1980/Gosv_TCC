@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3/Gosv/src/br/com/Gosv/dao/exceptions
+END
+PreexistingEntityException.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/Gosv/src/br/com/Gosv/dao/exceptions/PreexistingEntityException.java
+END
+NonexistentEntityException.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/Gosv/src/br/com/Gosv/dao/exceptions/NonexistentEntityException.java
+END
+IllegalOrphanException.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3/Gosv/src/br/com/Gosv/dao/exceptions/IllegalOrphanException.java
+END
